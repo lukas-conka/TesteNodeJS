@@ -1,0 +1,20 @@
+{
+  "name": "TesteNodeJS",
+  "version": "1.0.0",
+  "description": "Teste com 2 bancos, relacional e Nosql.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukas-conka/TesteNodeJS.git"
+  },
+  "keywords": [],
+  "author": "Lucas Amaral",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lukas-conka/TesteNodeJS/issues"
+  },
+  "homepage": "https://github.com/lukas-conka/TesteNodeJS#readme"
+}
