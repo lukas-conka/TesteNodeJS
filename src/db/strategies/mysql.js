@@ -29,6 +29,16 @@ class MySQL extends ICrud {
     return result;
   }
 
+  async update(id, item){
+    const result = this._crud.update(item, {where: {id: id}})
+    return result
+  }
+
+  async delete(id){
+    const query = id ? { id } : {}
+    return this._crud.destroy({where: query})
+  }
+
   async defineModel() {
     this._crud = this._driver.define(
       "Crud",
