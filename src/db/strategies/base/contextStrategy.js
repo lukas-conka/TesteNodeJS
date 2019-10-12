@@ -7,6 +7,7 @@ const ICrud = require("../interfaces/interfaceCrud");
   }
 
   create(item) {
+    
     return this._database.create(item);
   }
 
@@ -20,6 +21,14 @@ const ICrud = require("../interfaces/interfaceCrud");
 
   delete(id) {
     return this._database.delete(id);
+  }
+
+  isConnected(){
+    return this._database.isConnected()
+  }
+
+  connect() {
+    return this._database.connect()
   }
 }
 

@@ -19,6 +19,14 @@ class NotImplementedExpection extends Error {
     delete(id){
         throw new  NotImplementedExpection()
     }
+
+    isConnected(){
+        throw new NotImplementedExpection()
+    }
+
+    connect() {
+        throw new NotImplementedExpection()
+    }
 }
 
 module.exports = ICrud

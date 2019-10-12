@@ -4,7 +4,7 @@
   "description": "Teste com 2 bancos, relacional e Nosql.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,15 @@
   "bugs": {
     "url": "https://github.com/lukas-conka/TesteNodeJS/issues"
   },
-  "homepage": "https://github.com/lukas-conka/TesteNodeJS#readme"
+  "homepage": "https://github.com/lukas-conka/TesteNodeJS#readme",
+  "dependencies": {
+    "jest": "^24.9.0",
+    "mysql": "^2.17.1",
+    "mysql2": "^1.7.0",
+    "sequelize": "^5.19.5"
+  },
+  "devDependencies": {
+    "@types/sequelize": "^4.28.5",
+    "sequelize-cli": "^5.5.1"
+  }
 }
