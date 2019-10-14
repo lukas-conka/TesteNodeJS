@@ -1,11 +1,8 @@
-// const ContextStrategy = require("./db/strategies/base/contextStrategy");
-// const  MongoDB = require("./db/strategies/mongodb");
-// const  MySQL  = require("./db/strategies/mysql");
+const http = require('http')
 
-// const contextMongo = new ContextStrategy(new MongoDB());
-
-// contextMongo.create();
-
-// const contextMysql = new ContextStrategy(new MySQL());
-
-// contextMysql.create();
+http.createServer((req, res) => {
+    res.end('Hello world')
+})
+.listen(5000, () => {
+    console.log(`servidor online`)
+})
