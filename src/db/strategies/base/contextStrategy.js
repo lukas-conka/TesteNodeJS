@@ -27,7 +27,7 @@ const ICrud = require("../interfaces/interfaceCrud");
     return this._database.isConnected()
   }
 
-  connect() {
+  static connect() {
     return this._database.connect()
   }
 }

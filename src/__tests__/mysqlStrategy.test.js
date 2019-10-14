@@ -1,7 +1,6 @@
-const Mysql = require("../db/strategies/mysql");
+const Mysql = require("../db/strategies/mysql/mysql");
 const Context = require("../db/strategies/base/contextStrategy");
-
-const ContextStrategy = new Context(new Mysql());
+const CrudSchema = require("./../db/strategies/mysql/schemas/crudSchema");
 
 const MOCK_CRUD_DEFAULT = {
   nome: "Usuario Teste",
@@ -13,10 +12,14 @@ const MOCK_CRUD_ATUALIZAR = {
   email: "lukas@hotmail.co.jp"
 };
 
+let ContextStrategy = {};
+
 describe("Mysql strategy", function() {
   beforeAll(async () => {
-    await ContextStrategy.connect();
-    await ContextStrategy.delete()
+    const connection = await Mysql.connect();
+    const model = await Mysql.defineModel(connection, CrudSchema)
+    ContextStrategy = new Context(new Mysql(connection, model))
+    await ContextStrategy.delete();
     await ContextStrategy.create(MOCK_CRUD_ATUALIZAR);
   });
   it("Mysql connection", async function() {
@@ -33,7 +36,6 @@ describe("Mysql strategy", function() {
     const [result] = await ContextStrategy.read({
       nome: MOCK_CRUD_DEFAULT.nome
     });
-    console.log(result);
     delete result.id;
     expect(result).toEqual(MOCK_CRUD_DEFAULT);
   });
@@ -45,14 +47,16 @@ describe("Mysql strategy", function() {
       ...MOCK_CRUD_ATUALIZAR,
       nome: "Nome atualizado"
     };
-    const [result] = await ContextStrategy.update(itemAtualizar.id, novoItem)
-    const [itemAtualizado] = await ContextStrategy.read({id: itemAtualizar.id})
-    expect(itemAtualizado.nome).toEqual(novoItem.nome)
+    const [result] = await ContextStrategy.update(itemAtualizar.id, novoItem);
+    const [itemAtualizado] = await ContextStrategy.read({
+      id: itemAtualizar.id
+    });
+    expect(itemAtualizado.nome).toEqual(novoItem.nome);
   });
 
-  it('delete by id', async function() {
-      const [item] = await ContextStrategy.read({});
-      const result = await ContextStrategy.delete(item.id)
-      expect(result).toBe(1)
-  })
+  it("delete by id", async function() {
+    const [item] = await ContextStrategy.read({});
+    const result = await ContextStrategy.delete(item.id);
+    expect(result).toBe(1);
+  });
 });
