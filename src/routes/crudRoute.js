@@ -15,6 +15,9 @@ class CrudRoutes extends BaseRoutes {
   list() {
     return {
       config: {
+        tags: ["api"],
+        description: "Deve listar os dados do CRUD",
+        notes: "É possivel paginar os resultados e filtrar por Nome",
         validate: {
           failAction,
           query: {
@@ -51,6 +54,9 @@ class CrudRoutes extends BaseRoutes {
       path: "/cadastrar",
       method: "POST",
       config: {
+        tags: ["api"],
+        description: "Deve cadastrar os dados do CRUD",
+        notes: "Deve cadastrar o nome e email",
         validate: {
           failAction,
           payload: {
@@ -86,6 +92,9 @@ class CrudRoutes extends BaseRoutes {
       path: "/atualizar/{id}",
       method: "PATCH",
       config: {
+        tags: ["api"],
+        description: "Deve atualizar os dados do CRUD por ID",
+        notes: "Deve atualizar qualquer campo, passando o ID",
         validate: {
           params: {
             id: Joi.string().required()
@@ -128,6 +137,9 @@ class CrudRoutes extends BaseRoutes {
       path: "/remover/{id}",
       method: "DELETE",
       config: {
+        tags: ["api"],
+        description: "Deve remover os dados do CRUD por ID",
+        notes: "o id dever ser valido",
         validate: {
           failAction,
           params: {

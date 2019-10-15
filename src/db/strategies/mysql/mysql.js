@@ -51,6 +51,7 @@ class MySQL extends ICrud {
       dialect: "mysql",
       logging: false
     });
+    console.log("Database MYSQL ON"));
     return connection;
   }
 }

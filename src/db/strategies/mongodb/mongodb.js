@@ -35,7 +35,7 @@ class MongoDB extends ICrud {
     );
 
     const connection = Mongoose.connection;
-    connection.once("open", () => console.log("Database ON"));
+    connection.once("open", () => console.log("Database MONGODB ON"));
     return connection
   }
 
