@@ -5,7 +5,7 @@ const crudSchema = require("./db/strategies/mongodb/schemas/crudSchema");
 const CrudRoute = require('./routes/crudRoute')
 
 const app = new Hapi.Server({
-  port: 5000
+  port: 6000
 });
 
 function mapRoutes(instance, methods) {

@@ -4,7 +4,8 @@
   "description": "Teste com 2 bancos, relacional e Nosql.",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "start": "nodemon src/api"
   },
   "repository": {
     "type": "git",
@@ -18,16 +19,16 @@
   },
   "homepage": "https://github.com/lukas-conka/TesteNodeJS#readme",
   "dependencies": {
+    "boom": "^7.3.0",
     "hapi": "^18.1.0",
     "jest": "^24.9.0",
     "joi": "^14.3.1",
     "mongoose": "^5.7.4",
-    "mysql": "^2.17.1",
     "mysql2": "^1.7.0",
+    "nodemon": "^1.19.3",
     "sequelize": "^5.19.5"
   },
   "devDependencies": {
-    "@types/sequelize": "^4.28.5",
-    "sequelize-cli": "^5.5.1"
+    "@types/sequelize": "^4.28.5"
   }
 }

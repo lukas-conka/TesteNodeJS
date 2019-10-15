@@ -1,5 +1,7 @@
 const BaseRoutes = require("./base/baseRoute");
 const Joi = require("joi");
+const Boom = require("boom");
+
 const failAction = (request, headers, error) => {
   throw error;
 };
@@ -38,6 +40,7 @@ class CrudRoutes extends BaseRoutes {
           return this.db.read(query, skip, limit);
         } catch (error) {
           console.log("Erro na leitura dos dados", error);
+          return Boom.internal();
         }
       }
     };
@@ -72,6 +75,7 @@ class CrudRoutes extends BaseRoutes {
           return { message: "Cadastrado com sucesso.", _id: result._id };
         } catch (error) {
           console.log("Erro na requisicao ", error);
+          return Boom.internal();
         }
       }
     };
@@ -107,50 +111,47 @@ class CrudRoutes extends BaseRoutes {
 
           const result = await this.db.update(id, dados);
           if (result.nModified !== 1)
-            return {
-              message: "Não foi possivel atualizar."
-            };
+            return Boom.preconditionFailed("Id não encontrado.");
           return {
             message: "Atualizado com sucesso."
           };
         } catch (error) {
           console.log("erro na requisicao", error);
-          return "Erro interno";
+          return Boom.internal();
         }
       }
     };
   }
 
   delete() {
-      return {
-          path: '/remover/{id}',
-          method: 'DELETE',
-          config: {
-              validate: {
-                  failAction,
-                  params: {
-                      id: Joi.string().required()
-                  }
-              }
-          },
-          handler: async (request) => {
-            try{
-                const {id } = request.params;
-                const result = await this.db.delete(id)
-                if(result.n !== 1 ){
-                    return 'Não foi possivel remover o item'
-                }
-
-                return {
-                    message: 'Removido com sucesso.'
-                }
-
-            }catch(error){
-                console.log('Falha na requisicao'. error)
-                return 'Erro interno'
-            }
+    return {
+      path: "/remover/{id}",
+      method: "DELETE",
+      config: {
+        validate: {
+          failAction,
+          params: {
+            id: Joi.string().required()
           }
+        }
+      },
+      handler: async request => {
+        try {
+          const { id } = request.params;
+          const result = await this.db.delete(id);
+          if (result.n !== 1) {
+            return Boom.preconditionFailed("Id não encontrado.");
+          }
+
+          return {
+            message: "Removido com sucesso."
+          };
+        } catch (error) {
+          console.log("Falha na requisicao".error);
+          return Boom.internal();
+        }
       }
+    };
   }
 }
 
