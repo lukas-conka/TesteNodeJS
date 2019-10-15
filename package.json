@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/lukas-conka/TesteNodeJS#readme",
   "dependencies": {
+    "hapi": "^18.1.0",
     "jest": "^24.9.0",
+    "joi": "^14.3.1",
     "mongoose": "^5.7.4",
     "mysql": "^2.17.1",
     "mysql2": "^1.7.0",
