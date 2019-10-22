@@ -11,6 +11,11 @@ const MOCK_CRUD_ATUALIZAR = {
   email: "joao@email.com"
 };
 
+const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1a2FzY29ua2EiLCJpZCI6MSwiaWF0IjoxNTcxMzIwOTE4fQ.9EyoFRiCnJ4RqZllYibDvmRV1Lm6777W5KaknGroXvI"
+
+const headers = {
+  Authorization: TOKEN
+}
 let MOCK_ID = {};
 
 describe("Testes da Api", () => {
@@ -29,7 +34,8 @@ describe("Testes da Api", () => {
   it("Crud /listar", async () => {
     const result = await app.inject({
       method: "GET",
-      url: "/listar"
+      url: "/listar",
+      headers
     });
     const dados = JSON.parse(result.payload);
     const statusCode = result.statusCode;
@@ -41,7 +47,8 @@ describe("Testes da Api", () => {
     const TAMANHO_LIMIT = 3;
     const result = await app.inject({
       method: "GET",
-      url: `/listar?skip=0&limit=${TAMANHO_LIMIT}`
+      url: `/listar?skip=0&limit=${TAMANHO_LIMIT}`,
+      headers
     });
 
     const dados = JSON.parse(result.payload);
@@ -53,7 +60,8 @@ describe("Testes da Api", () => {
     const result = await app.inject({
       method: "POST",
       url: "/cadastrar",
-      payload: MOCK_CRUD_CADASTRAR
+      payload: MOCK_CRUD_CADASTRAR,
+      headers
     });
 
     const statusCode = result.statusCode;
@@ -71,7 +79,8 @@ describe("Testes da Api", () => {
     const result = await app.inject({
       method: "PATCH",
       url: `/atualizar/${_id}`,
-      payload: JSON.stringify(expected)
+      payload: JSON.stringify(expected),
+      headers
     });
 
     const statusCode = result.statusCode;
@@ -87,6 +96,7 @@ describe("Testes da Api", () => {
     const result = await app.inject({
       method: "DELETE",
       url: `/remover/${_id}`,
+      headers
     });
 
     const statusCode = result.statusCode;

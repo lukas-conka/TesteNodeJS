@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watch",
-    "start": "nodemon src/api"
-  },
+    "start": "nodemon src/api",
+    "test:prod":"cross-env NODE_ENV=prod npm t",
+    "prod":"cross-env NODE_ENV=prod node src/api"
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lukas-conka/TesteNodeJS.git"
@@ -19,12 +21,16 @@
   },
   "homepage": "https://github.com/lukas-conka/TesteNodeJS#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "boom": "^7.3.0",
+    "dotenv": "^8.2.0",
     "hapi": "^18.1.0",
+    "hapi-auth-jwt2": "^8.7.0",
     "hapi-swagger": "^9.1.3",
     "inert": "^5.1.3",
     "jest": "^24.9.0",
     "joi": "^14.3.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.4",
     "mysql2": "^1.7.0",
     "nodemon": "^1.19.3",
@@ -32,6 +38,7 @@
     "vision": "^5.4.4"
   },
   "devDependencies": {
-    "@types/sequelize": "^4.28.5"
+    "@types/sequelize": "^4.28.5",
+    "cross-env": "^6.0.3"
   }
 }

@@ -35,8 +35,9 @@ class MySQL extends ICrud {
     return result;
   }
 
-  async update(id, item) {
-    const result = this._schema.update(item, { where: { id: id } });
+  async update(id, item, upsert = false) {
+    const fn = upsert ? "upsert" : "update";
+    const result = this._schema[fn](item, { where: { id: id } });
     return result;
   }
 
@@ -46,13 +47,15 @@ class MySQL extends ICrud {
   }
 
   static async connect() {
-    const connection = new Sequelize("dbvivitech", "root", "swordfish", {
-      host: "localhost",
-      dialect: "mysql",
-      logging: false
+    const sequelize = new Sequelize(process.env.MYSQL_URL, {
+      logging: false,
+      ssl: process.env.SSL_DB,
+      /*dialectOptions:  {
+        ssl: process.env.SSL_DB
+      }*/
     });
-    console.log("Database MYSQL ON"));
-    return connection;
+    console.log("Database MYSQL ON");
+    return sequelize;
   }
 }
 

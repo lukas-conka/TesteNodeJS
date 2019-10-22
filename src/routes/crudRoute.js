@@ -6,6 +6,10 @@ const failAction = (request, headers, error) => {
   throw error;
 };
 
+const headers = Joi.object({
+  authorization: Joi.string().required()
+}).unknown()
+
 class CrudRoutes extends BaseRoutes {
   constructor(db) {
     super();
@@ -30,7 +34,8 @@ class CrudRoutes extends BaseRoutes {
             nome: Joi.string()
               .min(3)
               .max(100)
-          }
+          },
+          headers
         }
       },
       path: "/listar",
@@ -59,6 +64,7 @@ class CrudRoutes extends BaseRoutes {
         notes: "Deve cadastrar o nome e email",
         validate: {
           failAction,
+          headers,
           payload: {
             nome: Joi.string()
               .required()
@@ -99,6 +105,7 @@ class CrudRoutes extends BaseRoutes {
           params: {
             id: Joi.string().required()
           },
+          headers,
           payload: {
             nome: Joi.string()
               .min(3)
@@ -142,6 +149,7 @@ class CrudRoutes extends BaseRoutes {
         notes: "o id dever ser valido",
         validate: {
           failAction,
+          headers,
           params: {
             id: Joi.string().required()
           }
