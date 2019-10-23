@@ -6,9 +6,9 @@
   "scripts": {
     "test": "jest --watch",
     "start": "nodemon src/api",
-    "test:prod":"cross-env NODE_ENV=prod npm t",
-    "prod":"cross-env NODE_ENV=prod node src/api"
-    },
+    "test:prod": "cross-env NODE_ENV=prod npm t",
+    "prod": "cross-env NODE_ENV=prod node src/api"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lukas-conka/TesteNodeJS.git"
